@@ -2,7 +2,7 @@
 
 namespace mySimpleMessageService.Application.Contacts.Commands
 {
-    class RenameContactCommand : IRequest
+    public class UpdateContactCommand : IRequest
     {
         public string Name { get; set; }
         public int Id { get; set; }

@@ -7,7 +7,7 @@ using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
 {
-    class RenameContactCommandHandler : IRequestHandler<RenameContactCommand>
+    class RenameContactCommandHandler : IRequestHandler<UpdateContactCommand>
     {
         private readonly IContactRepository _contactRepository;
 
@@ -17,7 +17,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
             _contactRepository = contactRepository;
         }
 
-        public async Task<Unit> Handle(RenameContactCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateContactCommand request, CancellationToken cancellationToken)
         {
             var contact = await _contactRepository.GetAsync(request.Id);
             if (contact is null)

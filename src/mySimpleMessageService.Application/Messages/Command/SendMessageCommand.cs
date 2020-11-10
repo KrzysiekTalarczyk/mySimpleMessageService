@@ -3,7 +3,7 @@ using mySimpleMessageService.Domain.Models;
 
 namespace mySimpleMessageService.Application.Messages.Command
 {
-    class SendMessageCommand : IRequest
+    public class SendMessageCommand : IRequest
     {
         public int SenderId { get; set; }
         public MessageContent MessageContent { get; set; }

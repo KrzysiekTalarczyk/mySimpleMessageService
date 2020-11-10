@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using MediatR;
 using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Application.Contacts.Queries;
+using mySimpleMessageService.Application.Exceptions;
 using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
 {
-    class GetAllContactsHandler : IRequestHandler<GetAllContacts, IEnumerable<ContactDto>>
+    class GetAllContactsHandler : IRequestHandler<GetAllContactsQuery, IEnumerable<ContactDto>>
     {
         private readonly IContactRepository _contactRepository;
    
@@ -18,7 +19,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
             _contactRepository = contactRepository;
         }
 
-        public async Task<IEnumerable<ContactDto>> Handle(GetAllContacts request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ContactDto>> Handle(GetAllContactsQuery request, CancellationToken cancellationToken)
         {
             var contacts = await _contactRepository.GetAllAsync();
             return contacts.Select(ContactDto.Map);

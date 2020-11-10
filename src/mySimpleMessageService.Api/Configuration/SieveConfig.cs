@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sieve.Models;
 using Sieve.Services;
 
-namespace mySimpleMessageService.Api.Configuration.Startup
+namespace mySimpleMessageService.Api.Configuration
 {
     public static class SieveConfig
     {
