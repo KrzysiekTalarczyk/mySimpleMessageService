@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using mySimpleMessageService.Application.Contacts.Commands;
 using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Application.Contacts.Queries;
-using mySimpleMessageService.Application.Messages.Command;
 using NSwag.Annotations;
 
 namespace mySimpleMessageService.Api.Controllers
@@ -14,10 +13,10 @@ namespace mySimpleMessageService.Api.Controllers
 
         [HttpGet]
         [OpenApiOperation("Get all contacts")]
-        public async Task<IEnumerable<ContactDto>> Get()
+        public async Task<ActionResult<IEnumerable<ContactDto>>> Get([FromQuery] GetAllContactsQuery query)
         {
-            return await Mediator.Send(new GetAllContactsQuery());
-        }
+            return Ok(await Mediator.Send(query), query);
+         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateContactCommand request)
@@ -26,13 +25,13 @@ namespace mySimpleMessageService.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Post([FromBody] DeleteContactCommand request)
+        public async Task<IActionResult> Delete([FromBody] DeleteContactCommand request)
         {
             return Ok(await Mediator.Send(request));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Post([FromBody] UpdateContactCommand request)
+        public async Task<IActionResult> Put([FromBody] UpdateContactCommand request)
         {
             return Ok(await Mediator.Send(request));
         }

@@ -7,12 +7,12 @@ using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
 {
-    class RenameContactCommandHandler : IRequestHandler<UpdateContactCommand>
+    class UpdateContactCommandHandler : IRequestHandler<UpdateContactCommand>
     {
         private readonly IContactRepository _contactRepository;
 
 
-        public RenameContactCommandHandler(IContactRepository contactRepository)
+        public UpdateContactCommandHandler(IContactRepository contactRepository)
         {
             _contactRepository = contactRepository;
         }

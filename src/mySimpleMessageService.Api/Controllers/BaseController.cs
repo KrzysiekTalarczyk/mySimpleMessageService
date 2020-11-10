@@ -16,15 +16,9 @@ namespace mySimpleMessageService.Api.Controllers
         private IMediator _mediator;
         private ISieveProcessor _sieveProcessor;
 
-       protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         protected ISieveProcessor SieveProcessor => _sieveProcessor ??= HttpContext.RequestServices.GetService<ISieveProcessor>();
-
-        //protected BaseController(IMediator mediator, ISieveProcessor sieveProcessor)
-        //{
-        //    _mediator = mediator;
-        //    _sieveProcessor = sieveProcessor;
-        //}
 
         public OkObjectResult Ok<T>(IEnumerable<T> value, SieveModel sieveModel)
         {

@@ -2,7 +2,7 @@
 
 namespace mySimpleMessageService.Application.Messages.Command
 {
-    class DeleteMessageCommand : IRequest
+    public class DeleteMessageCommand : IRequest
     {
         public int MessageId { get; set; } //to guid
     }

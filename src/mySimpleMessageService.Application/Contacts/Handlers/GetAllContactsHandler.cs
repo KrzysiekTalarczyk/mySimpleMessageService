@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MediatR;
 using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Application.Contacts.Queries;
-using mySimpleMessageService.Application.Exceptions;
 using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
@@ -13,7 +12,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
     class GetAllContactsHandler : IRequestHandler<GetAllContactsQuery, IEnumerable<ContactDto>>
     {
         private readonly IContactRepository _contactRepository;
-   
+
         public GetAllContactsHandler(IContactRepository contactRepository)
         {
             _contactRepository = contactRepository;

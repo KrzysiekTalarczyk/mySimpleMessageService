@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using Moq;
@@ -16,8 +15,8 @@ namespace mySimpleMessageService.Tests.Application
 {
     public class CreateContactCommandHandlerTests
     {
-        [Theory, AutoMoqData]
-        public async Task Should_ThrowError_When_ContactName_IsEmpty()
+        [Fact]
+        public void Should_ThrowError_When_ContactName_IsEmpty()
         {
             Assert.Throws<ContactValidationException>(() => Contact.Create(string.Empty));
         }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using mySimpleMessageService.Domain.Exceptions;
+﻿using mySimpleMessageService.Domain.Exceptions;
 
 namespace mySimpleMessageService.Domain.Models
 {

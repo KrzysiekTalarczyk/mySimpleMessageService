@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using mySimpleMessageService.Application.Filtering;
 using Sieve.Models;
 using Sieve.Services;
 
