@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Application.Interfaces;
 using mySimpleMessageService.Domain.Models;
 
@@ -7,34 +11,44 @@ namespace mySimpleMessageService.Persistence.Repositories
 {
     public class ContactRepository : IContactRepository
     {
-        public Task<IEnumerable<Contact>> GetAllAsync()
+        private readonly SimpleMessageServiceDbContext _context;
+        public ContactRepository(SimpleMessageServiceDbContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public IQueryable<ContactDto> GetAllAsync()
+        {
+            return _context.Contacts.AsNoTracking().Select(c => new ContactDto(c));
         }
 
-        public Task AddNewAsync(Contact contact)
+        public async Task AddNewAsync(Contact contact)
         {
-            throw new System.NotImplementedException();
+            await _context.Contacts.AddAsync(contact);
         }
 
-        public Task DeleteAsync(int id)
+        public void Delete(Contact contact)
         {
-            throw new System.NotImplementedException();
+            _context.Remove(contact);
         }
 
-        public Task<Contact> GetAsync(int id)
+        public  Task<Contact> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return  _context.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<IEnumerable<Contact>> GetAsync(HashSet<int> ids)
+        {
+            return await _context.Contacts.Where(x => ids.Contains(x.Id)).Select(c => c).ToListAsync();
         }
 
         public Task<Contact> GetByNameAsync(string name)
         {
-            throw new System.NotImplementedException();
+            return _context.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public Task UpdateAsync(Contact contact)
+        public async Task UpdateAsync()
         {
-            throw new System.NotImplementedException();
+           await _context.SaveChangesAsync();
         }
     }
 }

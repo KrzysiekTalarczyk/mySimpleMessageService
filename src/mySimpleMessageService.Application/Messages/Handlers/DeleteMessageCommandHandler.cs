@@ -20,7 +20,7 @@ namespace mySimpleMessageService.Application.Messages.Handlers
             var message = await _messageRepository.GetAsync(request.MessageId);
             if (message is null)
                 throw new MessageNoFoundException(request.MessageId);
-            await _messageRepository.RemoveAsync(message);
+            _messageRepository.Remove(message);
             return Unit.Value;
         }
     }

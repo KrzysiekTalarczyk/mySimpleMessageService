@@ -23,7 +23,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
             if (contact is null)
                 throw new ContactNotFoundException(request.Id);
             contact.Name = request.Name;
-            await _contactRepository.UpdateAsync(contact);
+            await _contactRepository.UpdateAsync();
             return Unit.Value;
         }
     }

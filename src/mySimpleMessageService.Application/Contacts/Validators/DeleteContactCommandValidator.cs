@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using mySimpleMessageService.Application.Contacts.Commands;
 
-namespace mySimpleMessageService.Application.Validators
+namespace mySimpleMessageService.Application.Contacts.Validators
 {
     class DeleteContactCommandValidator : AbstractValidator<DeleteContactCommand>
     {

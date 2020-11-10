@@ -8,8 +8,9 @@ using Microsoft.Extensions.Hosting;
 using mySimpleMessageService.Api.Configuration;
 using MediatR;
 using mySimpleMessageService.Api.Extensions;
+using mySimpleMessageService.Application.Contacts.Validators;
 using mySimpleMessageService.Application.Messages.Command;
-using mySimpleMessageService.Application.Validators;
+using mySimpleMessageService.Application.Messages.Validators;
 
 namespace mySimpleMessageService.Api
 {

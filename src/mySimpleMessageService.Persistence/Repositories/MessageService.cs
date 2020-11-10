@@ -12,10 +12,5 @@ namespace mySimpleMessageService.Persistence.Repositories
         {
             throw new System.NotImplementedException();
         }
-
-        public Task<IEnumerable<MessageDto>> GetUsersMessages(int[] ints)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

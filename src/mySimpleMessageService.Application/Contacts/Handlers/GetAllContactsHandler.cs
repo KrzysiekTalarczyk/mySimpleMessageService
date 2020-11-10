@@ -20,8 +20,8 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
 
         public async Task<IEnumerable<ContactDto>> Handle(GetAllContactsQuery request, CancellationToken cancellationToken)
         {
-            var contacts = await _contactRepository.GetAllAsync();
-            return contacts.Select(ContactDto.Map);
+            var contacts =  _contactRepository.GetAllAsync().ToList();
+            return contacts;
         }
     }
 }

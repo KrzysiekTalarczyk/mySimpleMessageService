@@ -8,6 +8,5 @@ namespace mySimpleMessageService.Application.Interfaces
     public interface IMessageService
     {
         Task SaveMessageAsync(Message message);
-        Task<IEnumerable<MessageDto>> GetUsersMessages(int[] ints);
     }
 }

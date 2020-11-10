@@ -4,6 +4,6 @@ namespace mySimpleMessageService.Application.Messages.Command
 {
     public class DeleteMessageCommand : IRequest
     {
-        public int MessageId { get; set; } //to guid
+        public int MessageId { get; set; }
     }
 }

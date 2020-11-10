@@ -19,10 +19,10 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
 
         public async Task<Unit> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
-            var contact = _contactRepository.GetAsync(request.Id);
+            var contact = await _contactRepository.GetAsync(request.Id);
             if (contact is null)
                 throw new ContactNotFoundException(request.Id);
-            await _contactRepository.DeleteAsync(request.Id);
+            _contactRepository.Delete(contact);
             return Unit.Value;
         }
     }

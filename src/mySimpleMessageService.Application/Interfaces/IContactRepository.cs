@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Domain.Models;
 
 namespace mySimpleMessageService.Application.Interfaces
 {
     public interface IContactRepository
     {
-        Task<IEnumerable<Contact>> GetAllAsync();
+        IQueryable<ContactDto> GetAllAsync();
         Task AddNewAsync(Contact contact);
-        Task DeleteAsync(int id);
+        void Delete(Contact contact);
         Task<Contact> GetAsync(int id);
+        Task<IEnumerable<Contact>> GetAsync(HashSet<int> ids);
         Task<Contact> GetByNameAsync(string name);
-        Task UpdateAsync(Contact contact);
+        Task UpdateAsync();
     }
 }
