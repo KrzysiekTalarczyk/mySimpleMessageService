@@ -20,9 +20,9 @@ namespace mySimpleMessageService.Api.Controllers
 
         protected ISieveProcessor SieveProcessor => _sieveProcessor ??= HttpContext.RequestServices.GetService<ISieveProcessor>();
 
-        public OkObjectResult Ok<T>(IEnumerable<T> value, SieveModel sieveModel)
+        public OkObjectResult Ok<T>(IQueryable<T> value, SieveModel sieveModel)
         {
-            var results = SieveProcessor.Apply(sieveModel, value.AsQueryable(), applyPagination: false);
+            var results = SieveProcessor.Apply(sieveModel, value, applyPagination: false);
             var onePageResults = SieveProcessor.Apply(sieveModel, results, applyFiltering: false, applySorting: false,
                 applyPagination: true);
 

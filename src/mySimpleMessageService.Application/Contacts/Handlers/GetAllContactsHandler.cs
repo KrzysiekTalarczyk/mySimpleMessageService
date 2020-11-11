@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,7 +8,7 @@ using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
 {
-    class GetAllContactsHandler : IRequestHandler<GetAllContactsQuery, IEnumerable<ContactDto>>
+    class GetAllContactsHandler : IRequestHandler<GetAllContactsQuery, IQueryable<ContactDto>>
     {
         private readonly IContactRepository _contactRepository;
 
@@ -18,9 +17,9 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
             _contactRepository = contactRepository;
         }
 
-        public async Task<IEnumerable<ContactDto>> Handle(GetAllContactsQuery request, CancellationToken cancellationToken)
+        public async Task<IQueryable<ContactDto>> Handle(GetAllContactsQuery request, CancellationToken cancellationToken)
         {
-            var contacts =  _contactRepository.GetAllAsync().ToList();
+            var contacts = _contactRepository.GetAllAsync();
             return contacts;
         }
     }
