@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using mySimpleMessageService.Application.Contacts.Dtos;
+using mySimpleMessageService.Domain.Models;
 using Sieve.Models;
 using Sieve.Services;
 
@@ -14,8 +14,11 @@ namespace mySimpleMessageService.Application.Filtering
 
         protected override SievePropertyMapper MapProperties(SievePropertyMapper mapper)
         {
-            mapper.Property<ContactDto>(x => x.Name).CanFilter().CanSort().HasName("Name");
-            mapper.Property<ContactDto>(x => x.Id).CanFilter().CanSort().HasName("Id");
+            mapper.Property<Contact>(x => x.Name).CanFilter().CanSort().HasName("Name");
+            mapper.Property<Contact>(x => x.Id).CanFilter().CanSort().HasName("Id");
+
+            mapper.Property<Message>(x => x.MessageBody).CanFilter().CanSort();
+            mapper.Property<Message>(x => x.PostDateTime).CanFilter().CanSort();
             return mapper;
         }
     }

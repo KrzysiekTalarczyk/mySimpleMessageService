@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Sieve.Models;
-using Sieve.Services;
 using System.Collections.Generic;
-using System.Linq;
 using mySimpleMessageService.Api.Helpers;
 
 namespace mySimpleMessageService.Api.Controllers
@@ -14,19 +12,12 @@ namespace mySimpleMessageService.Api.Controllers
     public abstract class BaseController : Controller
     {
         private IMediator _mediator;
-        private ISieveProcessor _sieveProcessor;
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-        protected ISieveProcessor SieveProcessor => _sieveProcessor ??= HttpContext.RequestServices.GetService<ISieveProcessor>();
-
-        public OkObjectResult Ok<T>(IQueryable<T> value, SieveModel sieveModel)
+        public OkObjectResult Ok<T>(IEnumerable<T> value, SieveModel sieveModel, int totalResultCount)
         {
-            var results = SieveProcessor.Apply(sieveModel, value, applyPagination: false);
-            var onePageResults = SieveProcessor.Apply(sieveModel, results, applyFiltering: false, applySorting: false,
-                applyPagination: true);
-
-            return base.Ok(new PagedResult<T>(onePageResults, sieveModel.Page, sieveModel.PageSize, results.Count()));
+            return base.Ok(new PagedResult<T>(value, sieveModel.Page, sieveModel.PageSize, totalResultCount));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using mySimpleMessageService.Application.Interfaces;
@@ -27,11 +28,12 @@ namespace mySimpleMessageService.Persistence.Repositories
             _context.Messages.Remove(message);
         }
 
-        public IQueryable<MessageDto> GetMessagesBetweenContacts(ConversationRequest query)
+        public IEnumerable<Message> GetMessagesBetweenContacts(ConversationRequest query)
         {
-            return _context.Messages.Where(m => query.Contacts.Contains(m.SenderId) &&
+            return _context.Messages.AsNoTracking()
+                                    .Where(m => query.Contacts.Contains(m.SenderId) &&
                                                 query.Contacts.Contains(m.RecipientId))
-                                    .Select(m => new MessageDto(m.SenderId, m.RecipientId, m.PostDateTime, m.MessageBody));
+                                    .Select(m => m);
         }
 
         public async Task CompleteAsync()

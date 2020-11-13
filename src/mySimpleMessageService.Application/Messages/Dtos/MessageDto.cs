@@ -1,15 +1,16 @@
-﻿using System;
+﻿using mySimpleMessageService.Domain.Models;
+using System;
 
 namespace mySimpleMessageService.Application.Messages.Dtos
 {
     public class MessageDto
     {
-        public MessageDto(int senderId, int recipientId, DateTimeOffset postDateTime, string messageBody)
+        public MessageDto(Message message)
         {
-            SenderId = senderId;
-            RecipientId = recipientId;
-            PostDateTime = postDateTime;
-            MessageBody = messageBody;
+            SenderId = message.SenderId;
+            RecipientId = message.RecipientId;
+            PostDateTime = message.PostDateTime;
+            MessageBody = message.MessageBody;
         }
 
         public int SenderId { get; set; }

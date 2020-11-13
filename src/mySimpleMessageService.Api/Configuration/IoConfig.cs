@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using mySimpleMessageService.Application.Contacts;
+using mySimpleMessageService.Application.Filtering;
 using mySimpleMessageService.Application.Interfaces;
 using mySimpleMessageService.Persistence.Repositories;
 
@@ -12,6 +13,7 @@ namespace mySimpleMessageService.Api.Configuration
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IQueryFrameExecutor, QueryFrameExecutor>();
             return services;
         }
     }

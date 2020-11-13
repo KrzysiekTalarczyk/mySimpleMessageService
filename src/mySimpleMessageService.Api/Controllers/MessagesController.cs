@@ -14,8 +14,8 @@ namespace mySimpleMessageService.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDto>>> Get([FromQuery] GetMessagesQuery query)
         {
-            var results = await Mediator.Send(query);
-            return Ok(results);
+            var response = await Mediator.Send(query);
+            return Ok(response.Results, query, response.TotalResultCount);
         }
 
         [HttpPost]

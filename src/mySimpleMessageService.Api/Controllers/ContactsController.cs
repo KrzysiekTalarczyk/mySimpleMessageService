@@ -16,7 +16,8 @@ namespace mySimpleMessageService.Api.Controllers
         [OpenApiOperation("Get all contacts")]
         public async Task<ActionResult<IEnumerable<ContactDto>>> Get([FromQuery] GetAllContactsQuery query)
         {
-            return Ok(await Mediator.Send(query), query);
+            var response = await Mediator.Send(query);
+            return Ok(response.Results, query, response.TotalResultCount);
          }
 
         [HttpPost]

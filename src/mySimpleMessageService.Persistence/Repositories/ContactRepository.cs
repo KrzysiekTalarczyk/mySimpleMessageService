@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using mySimpleMessageService.Application.Contacts.Dtos;
 using mySimpleMessageService.Application.Interfaces;
 using mySimpleMessageService.Domain.Models;
 
@@ -16,11 +14,12 @@ namespace mySimpleMessageService.Persistence.Repositories
         {
             _context = context;
         }
-        public IQueryable<ContactDto> GetAllAsync()
+       
+        public IEnumerable<Contact> GetAllAsync()
         {
-            return _context.Contacts.AsNoTracking().Where(c => !c.Deleted).Select(c => new ContactDto(c));
+            return _context.Contacts.AsNoTracking().Where(c => !c.Deleted).Select(c => c);
         }
-
+        
         public async Task AddNewAsync(Contact contact)
         {
             await _context.Contacts.AddAsync(contact);
