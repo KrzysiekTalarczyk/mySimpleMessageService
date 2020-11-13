@@ -9,22 +9,23 @@ using mySimpleMessageService.Domain.Models;
 
 namespace mySimpleMessageService.Application.Messages.Handlers
 {
-    class SendMessageCommandHandler : IRequestHandler<SendMessageCommand>
+    public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand>
     {
-        private readonly IMessageService _messageService;
-        private readonly ContactService _contactService;
-        public SendMessageCommandHandler(IMessageService messageService, ContactService contactRepository)
+        private readonly IContactService _contactService;
+        private readonly IMessageRepository _messageRepository;
+
+        public SendMessageCommandHandler(IContactService contactRepository, IMessageRepository messageRepository)
         {
-            _messageService = messageService;
             _contactService = contactRepository;
+            _messageRepository = messageRepository;
         }
 
         public async Task<Unit> Handle(SendMessageCommand request, CancellationToken cancellationToken)
         {
-            await _contactService.CheckIfExists(new HashSet<int>() {request.SenderId, request.RecipientId});
-            
-            var message = Message.Create(request.SenderId, MessageContent.Create(request.MessageText), request.RecipientId);
-            await _messageService.SaveMessageAsync(message);
+            await _contactService.CheckIfExists(new HashSet<int>() { request.SenderId, request.RecipientId });
+            var message = Message.Create(request.SenderId, request.MessageText, request.RecipientId);
+            await _messageRepository.AddAsync(message);
+            await _messageRepository.CompleteAsync();
             return Unit.Value;
         }
     }

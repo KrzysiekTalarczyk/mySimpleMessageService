@@ -5,25 +5,23 @@ namespace mySimpleMessageService.Domain.Models
     public class Message
     {
         public int Id { get; set; }
-
         public int SenderId { get; set; }
         public int RecipientId { get; set; }
-
-        public DateTimeOffset Created { get; set; }
-        public MessageContent MessageContent { get; set; }
+        public string MessageBody { get; set; }
+        public DateTimeOffset PostDateTime { get; set; }
 
         private Message()
         {
         }
 
-        public static Message Create(int senderId, MessageContent content, int recipientId)
+        public static Message Create(int senderId, string body, int recipientId)
         {
             return new Message()
             {
                 SenderId = senderId,
                 RecipientId = recipientId,
-                MessageContent  = content,
-                Created = DateTimeOffset.Now
+                MessageBody = body,
+                PostDateTime = DateTimeOffset.Now
             };
         }
     }

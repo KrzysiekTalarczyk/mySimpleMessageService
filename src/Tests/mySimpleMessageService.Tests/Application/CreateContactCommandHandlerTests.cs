@@ -16,13 +16,13 @@ namespace mySimpleMessageService.Tests.Application
     public class CreateContactCommandHandlerTests
     {
         [Fact]
-        public void Should_ThrowError_When_ContactName_IsEmpty()
+        public void Should_ThrowError_When_ContactNameIsEmpty()
         {
             Assert.Throws<ContactValidationException>(() => Contact.Create(string.Empty));
         }
 
         [Theory, AutoMoqData]
-        public async Task Should_Invoke_RepositoryAddNew_Method([Frozen] Mock<IContactRepository> contactRepositoryMock,
+        public async Task Should_Invoke_RepositoryAddNewMethod([Frozen] Mock<IContactRepository> contactRepositoryMock,
                                                                 CreateContactCommandHandler handler,
                                                                 CancellationToken token,
                                                                 CreateContactCommand command)
@@ -36,7 +36,7 @@ namespace mySimpleMessageService.Tests.Application
         }
 
         [Theory, AutoMoqData]
-        public async Task Should_ThrowError_When_ContactName_Exist([Frozen] Mock<IContactRepository> contactRepositoryMock,
+        public async Task Should_ThrowError_When_ContactNameExist([Frozen] Mock<IContactRepository> contactRepositoryMock,
                                                                     CreateContactCommandHandler handler,
                                                                     CancellationToken token,
                                                                     CreateContactCommand command)

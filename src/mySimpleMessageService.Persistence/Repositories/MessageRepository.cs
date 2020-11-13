@@ -15,6 +15,11 @@ namespace mySimpleMessageService.Persistence.Repositories
             _context = context;
         }
 
+        public async Task AddAsync(Message message)
+        {
+            await _context.Messages.AddAsync(message);
+        }
+
         public Task<Message> GetAsync(int id) => _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
 
         public void Remove(Message message)
@@ -22,11 +27,16 @@ namespace mySimpleMessageService.Persistence.Repositories
             _context.Messages.Remove(message);
         }
 
-        public IQueryable<MessageDto> GetMessages(ConversationRequest query)
+        public IQueryable<MessageDto> GetMessagesBetweenContacts(ConversationRequest query)
         {
             return _context.Messages.Where(m => query.Contacts.Contains(m.SenderId) &&
                                                 query.Contacts.Contains(m.RecipientId))
-                                    .Select(m => new MessageDto(m));
+                                    .Select(m => new MessageDto(m.SenderId, m.RecipientId, m.PostDateTime, m.MessageBody));
+        }
+
+        public async Task CompleteAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

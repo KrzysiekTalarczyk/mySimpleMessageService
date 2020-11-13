@@ -9,6 +9,8 @@ namespace mySimpleMessageService.Application.Interfaces
     {
         Task<Message> GetAsync(int id);
         void Remove(Message message);
-        public IQueryable<MessageDto> GetMessages(ConversationRequest query);
+        public IQueryable<MessageDto> GetMessagesBetweenContacts(ConversationRequest query);
+        public Task CompleteAsync();
+        Task AddAsync(Message message);
     }
 }

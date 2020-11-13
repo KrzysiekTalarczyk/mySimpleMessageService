@@ -1,20 +1,20 @@
-﻿using mySimpleMessageService.Domain.Models;
-using System;
+﻿using System;
 
 namespace mySimpleMessageService.Application.Messages.Dtos
 {
     public class MessageDto
     {
-        private Message m;
-
-        public MessageDto(Message m)
+        public MessageDto(int senderId, int recipientId, DateTimeOffset postDateTime, string messageBody)
         {
-            this.m = m;
+            SenderId = senderId;
+            RecipientId = recipientId;
+            PostDateTime = postDateTime;
+            MessageBody = messageBody;
         }
 
         public int SenderId { get; set; }
-        public int ReceiverId { get; set; }
-        public DateTimeOffset Create { get; set; }
-        public string Text { get; set; } // to do change
+        public int RecipientId { get; set; }
+        public DateTimeOffset PostDateTime { get; set; }
+        public string MessageBody { get; set; }
     }
 }

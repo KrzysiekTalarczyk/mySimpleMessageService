@@ -17,7 +17,7 @@ namespace mySimpleMessageService.Application.Messages
         public IQueryable<MessageDto> GetUsersMessages(HashSet<int> contactIds)
         {
             var query = new ConversationRequest() { Contacts = contactIds };
-            return _messageRepository.GetMessages(query);
+            return _messageRepository.GetMessagesBetweenContacts(query);
         }
     }
 }

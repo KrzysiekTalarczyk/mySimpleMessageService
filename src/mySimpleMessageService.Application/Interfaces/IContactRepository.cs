@@ -14,6 +14,6 @@ namespace mySimpleMessageService.Application.Interfaces
         Task<Contact> GetAsync(int id);
         Task<IEnumerable<Contact>> GetAsync(HashSet<int> ids);
         Task<Contact> GetByNameAsync(string name);
-        Task UpdateAsync();
+        public Task CompleteAsync();
     }
 }

@@ -8,7 +8,7 @@ namespace mySimpleMessageService.Tests.Domain
     public class ContactTests
     {
         [Fact]
-        public void Should_ThrowError_When_ContactName_IsEmpty()
+        public void Should_ThrowError_When_ContactNameIsEmpty()
         {
             Assert.Throws<ContactValidationException>(() => Contact.Create(string.Empty));
         }

@@ -31,9 +31,9 @@ namespace mySimpleMessageService.Persistence.Repositories
             _context.Remove(contact);
         }
 
-        public  Task<Contact> GetAsync(int id)
+        public Task<Contact> GetAsync(int id)
         {
-            return  _context.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+            return _context.Contacts.FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<IEnumerable<Contact>> GetAsync(HashSet<int> ids)
@@ -46,9 +46,9 @@ namespace mySimpleMessageService.Persistence.Repositories
             return _context.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public async Task UpdateAsync()
+        public async Task CompleteAsync()
         {
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }
