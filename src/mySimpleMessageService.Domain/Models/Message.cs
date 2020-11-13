@@ -10,6 +10,9 @@ namespace mySimpleMessageService.Domain.Models
         public string MessageBody { get; set; }
         public DateTimeOffset PostDateTime { get; set; }
 
+        public Contact Sender { get; set; }
+        public Contact Recipient { get; set; }
+
         private Message()
         {
         }

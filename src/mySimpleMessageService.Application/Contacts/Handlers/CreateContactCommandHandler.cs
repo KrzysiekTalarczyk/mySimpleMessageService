@@ -25,6 +25,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
                 throw new ContactExistException(request.Name);
             var contact = Contact.Create(request.Name);
             await _contactRepository.AddNewAsync(contact);
+            await _contactRepository.CompleteAsync();
             return Unit.Value;
         }
     }

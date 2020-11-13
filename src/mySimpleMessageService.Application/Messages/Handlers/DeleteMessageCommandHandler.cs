@@ -21,6 +21,7 @@ namespace mySimpleMessageService.Application.Messages.Handlers
             if (message is null)
                 throw new MessageNoFoundException(request.MessageId);
             _messageRepository.Remove(message);
+            await _messageRepository.CompleteAsync();
             return Unit.Value;
         }
     }

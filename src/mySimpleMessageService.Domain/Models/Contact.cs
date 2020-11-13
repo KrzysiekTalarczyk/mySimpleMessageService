@@ -1,12 +1,15 @@
-﻿using mySimpleMessageService.Domain.Exceptions;
+﻿using System.Collections.Generic;
+using mySimpleMessageService.Domain.Exceptions;
 
 namespace mySimpleMessageService.Domain.Models
 {
     public class Contact
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
+        public bool Deleted { get; set; }
+        public ICollection<Message> SenderMessages { get; set; }
+        public ICollection<Message> RecipientMessages { get; set; }
 
         private Contact() { }
 

@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using mySimpleMessageService.Api.Configuration;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using mySimpleMessageService.Api.Extensions;
 using mySimpleMessageService.Application.Contacts.Validators;
 using mySimpleMessageService.Application.Messages.Command;
 using mySimpleMessageService.Application.Messages.Validators;
+using mySimpleMessageService.Persistence;
 
 namespace mySimpleMessageService.Api
 {
@@ -25,7 +27,9 @@ namespace mySimpleMessageService.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
+            services.AddDbContext<SimpleMessageServiceDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddMvc()
                     .AddFluentValidation(s =>
                     {

@@ -18,7 +18,7 @@ namespace mySimpleMessageService.Persistence.Repositories
         }
         public IQueryable<ContactDto> GetAllAsync()
         {
-            return _context.Contacts.AsNoTracking().Select(c => new ContactDto(c));
+            return _context.Contacts.AsNoTracking().Where(c => !c.Deleted).Select(c => new ContactDto(c));
         }
 
         public async Task AddNewAsync(Contact contact)
@@ -28,22 +28,22 @@ namespace mySimpleMessageService.Persistence.Repositories
 
         public void Delete(Contact contact)
         {
-            _context.Remove(contact);
+            contact.Deleted = true;
         }
 
         public Task<Contact> GetAsync(int id)
         {
-            return _context.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+            return _context.Contacts.FirstOrDefaultAsync(c =>!c.Deleted && c.Id == id);
         }
 
         public async Task<IEnumerable<Contact>> GetAsync(HashSet<int> ids)
         {
-            return await _context.Contacts.Where(x => ids.Contains(x.Id)).Select(c => c).ToListAsync();
+            return await _context.Contacts.Where(x => !x.Deleted && ids.Contains(x.Id)).Select(c => c).ToListAsync();
         }
 
         public Task<Contact> GetByNameAsync(string name)
         {
-            return _context.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
+            return _context.Contacts.AsNoTracking().FirstOrDefaultAsync(c => !c.Deleted && c.Name.Equals(name));
         }
 
         public async Task CompleteAsync()

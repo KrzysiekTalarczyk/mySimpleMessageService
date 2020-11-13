@@ -7,11 +7,12 @@ using mySimpleMessageService.Application.Messages.Queries;
 
 namespace mySimpleMessageService.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class MessagesController : BaseController
     {
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MessageDto>>> Get(GetMessagesQuery query)
+        public async Task<ActionResult<IEnumerable<MessageDto>>> Get([FromQuery] GetMessagesQuery query)
         {
             var results = await Mediator.Send(query);
             return Ok(results);
@@ -24,7 +25,7 @@ namespace mySimpleMessageService.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Post([FromBody] DeleteMessageCommand request)
+        public async Task<IActionResult> Delete([FromBody] DeleteMessageCommand request)
         {
             return Ok(await Mediator.Send(request));
         }

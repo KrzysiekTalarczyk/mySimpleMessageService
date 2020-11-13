@@ -8,6 +8,7 @@ using NSwag.Annotations;
 
 namespace mySimpleMessageService.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class ContactsController : BaseController
     {
 

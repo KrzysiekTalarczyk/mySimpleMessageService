@@ -11,15 +11,17 @@ namespace mySimpleMessageService.Application.Messages.Handlers
 {
     class GetMessagesQueryHandler : IRequestHandler<GetMessagesQuery, IQueryable<MessageDto>>
     {
-        private readonly MessageService _messageService;
-        public GetMessagesQueryHandler(MessageService messageService)
+        private readonly IMessageRepository _messageRepository;
+
+        public GetMessagesQueryHandler(IMessageRepository messageRepository)
         {
-            _messageService = messageService;
+            _messageRepository = messageRepository;
         }
 
         public async Task<IQueryable<MessageDto>> Handle(GetMessagesQuery request, CancellationToken cancellationToken)
         {
-            var messages =  _messageService.GetUsersMessages(new HashSet<int>() { request.SenderId, request.ReceiverId });
+            var query = new ConversationRequest() { Contacts = new HashSet<int>() { request.SenderId, request.ReceiverId } };
+            var messages = _messageRepository.GetMessagesBetweenContacts(query);
             return messages;
         }
     }
