@@ -33,3 +33,5 @@ msbuild.wrn
 /.sonarqube
 /In2itiveBusiness.Application.Tests/.sonarqube
 /.idea/.idea.In2itiveBusiness
+/src/mySimpleMessageService.Api/Properties/PublishProfiles/CustomProfile.pubxml
+/src/mySimpleMessageService.Api/.config/dotnet-tools.json

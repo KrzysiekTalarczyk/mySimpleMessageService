@@ -9,7 +9,6 @@ using mySimpleMessageService.Api.Configuration;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using mySimpleMessageService.Api.Extensions;
-using mySimpleMessageService.Application.Contacts.Validators;
 using mySimpleMessageService.Application.Messages.Command;
 using mySimpleMessageService.Application.Messages.Validators;
 using mySimpleMessageService.Persistence;

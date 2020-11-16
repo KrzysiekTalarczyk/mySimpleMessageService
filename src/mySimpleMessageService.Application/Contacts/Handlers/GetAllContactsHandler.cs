@@ -25,7 +25,7 @@ namespace mySimpleMessageService.Application.Contacts.Handlers
             var contacts = _contactRepository.GetAllAsync();
             var filteredResults = _queryFrameExecutor.SelectData(contacts, request, out var totalResultCount);
             var contactsDto = filteredResults.Select(c => new ContactDto(c));
-            return new FilteredResponse<ContactDto>(contactsDto, totalResultCount);
+            return await Task.FromResult(new FilteredResponse<ContactDto>(contactsDto, totalResultCount));
         }
     }
 }

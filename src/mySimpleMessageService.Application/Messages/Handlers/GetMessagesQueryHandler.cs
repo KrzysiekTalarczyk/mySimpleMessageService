@@ -22,13 +22,13 @@ namespace mySimpleMessageService.Application.Messages.Handlers
             _queryFrameExecutor = queryFrameExecutor;
         }
 
-        public async Task<FilteredResponse<MessageDto>> Handle(GetMessagesQuery request, CancellationToken cancellationToken)
+        public Task<FilteredResponse<MessageDto>> Handle(GetMessagesQuery request, CancellationToken cancellationToken)
         {
             var query = new ConversationRequest() { Contacts = new HashSet<int>() { request.SenderId, request.ReceiverId } };
             var messages = _messageRepository.GetMessagesBetweenContacts(query);
             var filteredResults = _queryFrameExecutor.SelectData(messages, request, out var totalResultCount);
             var messagesDto = filteredResults.Select(c => new MessageDto(c));
-            return new FilteredResponse<MessageDto>(messagesDto, totalResultCount);
+            return Task.FromResult(new FilteredResponse<MessageDto>(messagesDto, totalResultCount));
         }
     }
 }

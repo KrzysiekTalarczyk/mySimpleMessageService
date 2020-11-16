@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using mySimpleMessageService.Application.Contacts.Commands;
-using mySimpleMessageService.Application.Exceptions;
 using mySimpleMessageService.Application.Interfaces;
 
 namespace mySimpleMessageService.Application.Contacts.Handlers
