@@ -33,23 +33,36 @@ The app is available on:
 
 use cases example:
 Add new contact:
+
 POST
+
+
 http://kristal-001-site1.itempurl.com/api/Contacts
+
+
 body:
 {
 "name": "new_Contact6"
 }
 
 Get Contacts:
+
+
 http://kristal-001-site1.itempurl.com/api/Contacts 
-You can filter, sort contacts by Name ()
+
+You can filter, sort contacts by Name
+
 http://kristal-001-site1.itempurl.com/api/Contacts?Filters=name@=cont&Sorts=-name
+
 You can configure the pagination of results. 
+
 http://kristal-001-site1.itempurl.com/api/Contacts?Page=1&PageSize=2
 
 Send a few Messages 
 post:
+
 http://kristal-001-site1.itempurl.com/api/Messages
+
 body:
 {
   "senderId": 1,
@@ -61,9 +74,11 @@ Get Messages
 http://kristal-001-site1.itempurl.com/api/Messages?SenderId=1&ReceiverId=2
 
 You can filter, sort the messages by body, or post date.
+
 http://kristal-001-site1.itempurl.com/api/Messages?SenderId=1&ReceiverId=2&Filters=messageBody@=new&Sorts=-postDateTime
 
 You can configure the pagination of results. 
+
 http://kristal-001-site1.itempurl.com/api/Messages?SenderId=1&ReceiverId=2&Page=1&PageSize=2
 
 
